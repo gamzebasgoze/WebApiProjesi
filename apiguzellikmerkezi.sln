@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32901.82
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "apiguzellikmerkezi", "apiguzellikmerkezi\apiguzellikmerkezi.csproj", "{5CBC2A25-500E-4B92-9A5F-2A791D90A9AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mvcguzellik", "mvcguzellik\mvcguzellik.csproj", "{CF659C57-F373-4A1E-9FB7-3B9247188085}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5CBC2A25-500E-4B92-9A5F-2A791D90A9AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CBC2A25-500E-4B92-9A5F-2A791D90A9AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CBC2A25-500E-4B92-9A5F-2A791D90A9AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CBC2A25-500E-4B92-9A5F-2A791D90A9AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF659C57-F373-4A1E-9FB7-3B9247188085}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF659C57-F373-4A1E-9FB7-3B9247188085}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF659C57-F373-4A1E-9FB7-3B9247188085}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF659C57-F373-4A1E-9FB7-3B9247188085}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7422A9C4-D8C9-4EE8-BBB9-0AFEFB66F8FB}
+	EndGlobalSection
+EndGlobal

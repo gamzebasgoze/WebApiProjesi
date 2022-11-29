@@ -1,0 +1,39 @@
+﻿@model mvcguzellik.Models.mvcUrunlerModel
+@{
+    ViewBag.Title = "Ekle";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<div class="form-body">
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(model => model.UrunNo)
+        <div class="form-group">
+            @Html.LabelFor(model => model.UrunAdi)
+            @Html.TextBoxFor(model => model.UrunAdi, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.UrunAdi)<br />
+
+
+
+            @Html.LabelFor(model => model.UrunFiyat)
+            @Html.TextBoxFor(model => model.UrunFiyat, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.UrunFiyat)<br />
+
+
+
+            @Html.LabelFor(model => model.KullanimAmaci)
+            @Html.TextBoxFor(model => model.KullanimAmaci, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.KullanimAmaci)<br />
+
+        </div>
+        <div class="form-body">
+            <input type="submit" value="Kaydet" class="btn btn-success" />
+            <input type="reset" value="Reset" class="btn btn-success" />
+        </div>
+    }
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jgeryval");
+}
+

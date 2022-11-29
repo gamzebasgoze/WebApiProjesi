@@ -1,0 +1,36 @@
+﻿@model mvcguzellik.Models.mvcHizmetlerModel
+@{
+    ViewBag.Title = "Ekle";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Ekle</h2>
+
+<div class="form-body">
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(model => model.HizmetNo)
+        <div class="form-group">
+            @Html.LabelFor(model => model.HizmetAdi)
+            @Html.TextBoxFor(model => model.HizmetAdi, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.HizmetAdi)<br />
+
+            @Html.LabelFor(model => model.HizmetAmaci)
+            @Html.TextBoxFor(model => model.HizmetAmaci, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.HizmetAmaci)<br />
+
+            @Html.LabelFor(model => model.Fiyat)
+            @Html.TextBoxFor(model => model.Fiyat, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Fiyat)<br />
+
+        </div>
+        <div class="form-body">
+            <input type="submit" value="Kaydet" class="btn btn-success" />
+            <input type="reset" value="Reset" class="btn btn-success" />
+        </div>
+    }
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jgeryval");
+}

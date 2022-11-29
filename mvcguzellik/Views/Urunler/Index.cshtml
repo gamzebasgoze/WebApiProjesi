@@ -1,0 +1,56 @@
+﻿@model IEnumerable<mvcguzellik.Models.mvcUrunlerModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<p>
+    @Html.ActionLink("Yeni Ekle", "Ekle")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UrunAdi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UrunFiyat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KullanimAmaci)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UrunAdi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UrunFiyat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KullanimAmaci)
+            </td>
+            <td>
+                <a href="@Url.Action("Ekle","Ürünler",new { id = item.UrunNo })" class="btn btn-success"><i class="glyphicon glyphicon-pencil"></i>Edit</a>
+                <a onclick="Sil(@item.UrunNo)" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>Sil
+            </td>
+        </tr>
+    }
+
+</table>
+@section scripts{
+    <script>
+    $(function () {
+        var successMesage = '@TempData["SuccessMessage"]';
+        if (successMesage != '')
+            alertify.success(successMesage);
+    });
+    function Sil(id) {
+        alertify.confirm('Silme işlemi', 'Kaydı silmek ister misiniz?', function () { window.location.href = '@Url.Action("Sil","Salonlar")/' + id; }, null);
+    }
+
+    </script>
+}

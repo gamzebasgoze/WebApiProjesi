@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GuzellikMerkeziModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Calisanlar">
+          <Key>
+            <PropertyRef Name="CalisanNo" />
+          </Key>
+          <Property Name="CalisanNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CalisanAdi" Type="varchar" MaxLength="50" />
+          <Property Name="Yas" Type="int" />
+          <Property Name="Telefon" Type="varchar" MaxLength="50" />
+          <Property Name="Mail" Type="varchar" MaxLength="50" />
+          <Property Name="Adres" Type="varchar" MaxLength="50" />
+          <Property Name="SalonNo" Type="int" />
+        </EntityType>
+        <EntityType Name="Hizmetler">
+          <Key>
+            <PropertyRef Name="HizmetNo" />
+          </Key>
+          <Property Name="HizmetNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HizmetAdi" Type="varchar" MaxLength="50" />
+          <Property Name="HizmetAmaci" Type="varchar" MaxLength="50" />
+          <Property Name="Fiyat" Type="money" />
+          <Property Name="CalisanNo" Type="int" />
+        </EntityType>
+        <EntityType Name="Salonlar">
+          <Key>
+            <PropertyRef Name="SalonNo" />
+          </Key>
+          <Property Name="SalonNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SalonAdi" Type="varchar" MaxLength="50" />
+          <Property Name="CalisanSayisi" Type="varchar" MaxLength="50" />
+          <Property Name="VerilenHizmetler" Type="varchar" MaxLength="50" />
+          <Property Name="HizmetSayisi" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Urunler">
+          <Key>
+            <PropertyRef Name="UrunNo" />
+          </Key>
+          <Property Name="UrunNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UrunAdi" Type="varchar" MaxLength="50" />
+          <Property Name="UrunFiyat" Type="money" />
+          <Property Name="KullanimAmaci" Type="varchar" MaxLength="50" />
+          <Property Name="HizmetNo" Type="int" />
+        </EntityType>
+        <Association Name="FK_Calisanlar_Salonlar">
+          <End Role="Salonlar" Type="Self.Salonlar" Multiplicity="0..1" />
+          <End Role="Calisanlar" Type="Self.Calisanlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Salonlar">
+              <PropertyRef Name="SalonNo" />
+            </Principal>
+            <Dependent Role="Calisanlar">
+              <PropertyRef Name="SalonNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hizmetler_Calisanlar">
+          <End Role="Calisanlar" Type="Self.Calisanlar" Multiplicity="0..1" />
+          <End Role="Hizmetler" Type="Self.Hizmetler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Calisanlar">
+              <PropertyRef Name="CalisanNo" />
+            </Principal>
+            <Dependent Role="Hizmetler">
+              <PropertyRef Name="CalisanNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Urunler_Hizmetler">
+          <End Role="Hizmetler" Type="Self.Hizmetler" Multiplicity="0..1" />
+          <End Role="Urunler" Type="Self.Urunler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hizmetler">
+              <PropertyRef Name="HizmetNo" />
+            </Principal>
+            <Dependent Role="Urunler">
+              <PropertyRef Name="HizmetNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GuzellikMerkeziModelStoreContainer">
+          <EntitySet Name="Calisanlar" EntityType="Self.Calisanlar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hizmetler" EntityType="Self.Hizmetler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Salonlar" EntityType="Self.Salonlar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Urunler" EntityType="Self.Urunler" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Calisanlar_Salonlar" Association="Self.FK_Calisanlar_Salonlar">
+            <End Role="Salonlar" EntitySet="Salonlar" />
+            <End Role="Calisanlar" EntitySet="Calisanlar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hizmetler_Calisanlar" Association="Self.FK_Hizmetler_Calisanlar">
+            <End Role="Calisanlar" EntitySet="Calisanlar" />
+            <End Role="Hizmetler" EntitySet="Hizmetler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Urunler_Hizmetler" Association="Self.FK_Urunler_Hizmetler">
+            <End Role="Hizmetler" EntitySet="Hizmetler" />
+            <End Role="Urunler" EntitySet="Urunler" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GuzellikMerkeziModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Calisanlar">
+          <Key>
+            <PropertyRef Name="CalisanNo" />
+          </Key>
+          <Property Name="CalisanNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CalisanAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Yas" Type="Int32" />
+          <Property Name="Telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Adres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SalonNo" Type="Int32" />
+          <NavigationProperty Name="Salonlar" Relationship="Self.FK_Calisanlar_Salonlar" FromRole="Calisanlar" ToRole="Salonlar" />
+          <NavigationProperty Name="Hizmetlers" Relationship="Self.FK_Hizmetler_Calisanlar" FromRole="Calisanlar" ToRole="Hizmetler" />
+        </EntityType>
+        <EntityType Name="Hizmetler">
+          <Key>
+            <PropertyRef Name="HizmetNo" />
+          </Key>
+          <Property Name="HizmetNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HizmetAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HizmetAmaci" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fiyat" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CalisanNo" Type="Int32" />
+          <NavigationProperty Name="Calisanlar" Relationship="Self.FK_Hizmetler_Calisanlar" FromRole="Hizmetler" ToRole="Calisanlar" />
+          <NavigationProperty Name="Urunlers" Relationship="Self.FK_Urunler_Hizmetler" FromRole="Hizmetler" ToRole="Urunler" />
+        </EntityType>
+        <EntityType Name="Salonlar">
+          <Key>
+            <PropertyRef Name="SalonNo" />
+          </Key>
+          <Property Name="SalonNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SalonAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CalisanSayisi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VerilenHizmetler" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HizmetSayisi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Calisanlars" Relationship="Self.FK_Calisanlar_Salonlar" FromRole="Salonlar" ToRole="Calisanlar" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Urunler">
+          <Key>
+            <PropertyRef Name="UrunNo" />
+          </Key>
+          <Property Name="UrunNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UrunAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UrunFiyat" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="KullanimAmaci" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HizmetNo" Type="Int32" />
+          <NavigationProperty Name="Hizmetler" Relationship="Self.FK_Urunler_Hizmetler" FromRole="Urunler" ToRole="Hizmetler" />
+        </EntityType>
+        <Association Name="FK_Calisanlar_Salonlar">
+          <End Role="Salonlar" Type="Self.Salonlar" Multiplicity="0..1" />
+          <End Role="Calisanlar" Type="Self.Calisanlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Salonlar">
+              <PropertyRef Name="SalonNo" />
+            </Principal>
+            <Dependent Role="Calisanlar">
+              <PropertyRef Name="SalonNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hizmetler_Calisanlar">
+          <End Role="Calisanlar" Type="Self.Calisanlar" Multiplicity="0..1" />
+          <End Role="Hizmetler" Type="Self.Hizmetler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Calisanlar">
+              <PropertyRef Name="CalisanNo" />
+            </Principal>
+            <Dependent Role="Hizmetler">
+              <PropertyRef Name="CalisanNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Urunler_Hizmetler">
+          <End Role="Hizmetler" Type="Self.Hizmetler" Multiplicity="0..1" />
+          <End Role="Urunler" Type="Self.Urunler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hizmetler">
+              <PropertyRef Name="HizmetNo" />
+            </Principal>
+            <Dependent Role="Urunler">
+              <PropertyRef Name="HizmetNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GuzellikMerkeziEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Calisanlars" EntityType="Self.Calisanlar" />
+          <EntitySet Name="Hizmetlers" EntityType="Self.Hizmetler" />
+          <EntitySet Name="Salonlars" EntityType="Self.Salonlar" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Urunlers" EntityType="Self.Urunler" />
+          <AssociationSet Name="FK_Calisanlar_Salonlar" Association="Self.FK_Calisanlar_Salonlar">
+            <End Role="Salonlar" EntitySet="Salonlars" />
+            <End Role="Calisanlar" EntitySet="Calisanlars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hizmetler_Calisanlar" Association="Self.FK_Hizmetler_Calisanlar">
+            <End Role="Calisanlar" EntitySet="Calisanlars" />
+            <End Role="Hizmetler" EntitySet="Hizmetlers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Urunler_Hizmetler" Association="Self.FK_Urunler_Hizmetler">
+            <End Role="Hizmetler" EntitySet="Hizmetlers" />
+            <End Role="Urunler" EntitySet="Urunlers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GuzellikMerkeziModelStoreContainer" CdmEntityContainer="GuzellikMerkeziEntities">
+          <EntitySetMapping Name="Calisanlars">
+            <EntityTypeMapping TypeName="GuzellikMerkeziModel.Calisanlar">
+              <MappingFragment StoreEntitySet="Calisanlar">
+                <ScalarProperty Name="CalisanNo" ColumnName="CalisanNo" />
+                <ScalarProperty Name="CalisanAdi" ColumnName="CalisanAdi" />
+                <ScalarProperty Name="Yas" ColumnName="Yas" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="SalonNo" ColumnName="SalonNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hizmetlers">
+            <EntityTypeMapping TypeName="GuzellikMerkeziModel.Hizmetler">
+              <MappingFragment StoreEntitySet="Hizmetler">
+                <ScalarProperty Name="HizmetNo" ColumnName="HizmetNo" />
+                <ScalarProperty Name="HizmetAdi" ColumnName="HizmetAdi" />
+                <ScalarProperty Name="HizmetAmaci" ColumnName="HizmetAmaci" />
+                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+                <ScalarProperty Name="CalisanNo" ColumnName="CalisanNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Salonlars">
+            <EntityTypeMapping TypeName="GuzellikMerkeziModel.Salonlar">
+              <MappingFragment StoreEntitySet="Salonlar">
+                <ScalarProperty Name="SalonNo" ColumnName="SalonNo" />
+                <ScalarProperty Name="SalonAdi" ColumnName="SalonAdi" />
+                <ScalarProperty Name="CalisanSayisi" ColumnName="CalisanSayisi" />
+                <ScalarProperty Name="VerilenHizmetler" ColumnName="VerilenHizmetler" />
+                <ScalarProperty Name="HizmetSayisi" ColumnName="HizmetSayisi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="GuzellikMerkeziModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Urunlers">
+            <EntityTypeMapping TypeName="GuzellikMerkeziModel.Urunler">
+              <MappingFragment StoreEntitySet="Urunler">
+                <ScalarProperty Name="UrunNo" ColumnName="UrunNo" />
+                <ScalarProperty Name="UrunAdi" ColumnName="UrunAdi" />
+                <ScalarProperty Name="UrunFiyat" ColumnName="UrunFiyat" />
+                <ScalarProperty Name="KullanimAmaci" ColumnName="KullanimAmaci" />
+                <ScalarProperty Name="HizmetNo" ColumnName="HizmetNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

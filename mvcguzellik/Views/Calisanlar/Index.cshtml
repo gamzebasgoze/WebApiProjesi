@@ -1,0 +1,70 @@
+﻿@model IEnumerable<mvcguzellik.Models.mvcCalisanlarModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Yeni Ekle", "Ekle")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CalisanAdi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Yas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telefon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Adres)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CalisanAdi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Yas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adres)
+            </td>
+            <td>
+                <a href="@Url.Action("Ekle","Çalışanlar",new { id = item.CalisanNo })" class="btn btn-success"><i class="glyphicon glyphicon-pencil"></i>Edit</a>
+                <a onclick="Sil(@item.CalisanNo)" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>Sil
+            </td>
+        </tr>
+    }
+
+</table>
+@section scripts{
+    <script>
+    $(function () {
+        var successMesage = '@TempData["SuccessMessage"]';
+        if (successMesage != '')
+            alertify.success(successMesage);
+    });
+    function Sil(id) {
+        alertify.confirm('Silme işlemi', 'Kaydı silmek ister misiniz?', function () { window.location.href = '@Url.Action("Sil","Salonlar")/' + id; }, null);
+    }
+
+    </script>
+}
