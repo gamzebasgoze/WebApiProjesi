@@ -14,11 +14,11 @@ namespace mvcguzellik.Controllers
         public ActionResult Index()
         {
             IEnumerable<mvcUrunlerModel> calList;
-            HttpResponseMessage response = GlobalVariables.WebApClient.GetAsync("Urunler").Result;
+            HttpResponseMessage response = GlobalVariables.WebApClient.GetAsync("Urunlers").Result;
             calList = response.Content.ReadAsAsync<IEnumerable<mvcUrunlerModel>>().Result;
             return View(calList);
         }
-        public ActionResult Ekle(int id = 0) //CROP işlemi hem ekleme hem güncelleme işlemi
+        public ActionResult Ekle(int id = 0) //CROP işlemi hem ekleme hem güncelleme işlemi burada yapıldı.
         {
             if (id == 0)
             {

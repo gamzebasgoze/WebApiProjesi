@@ -13,6 +13,7 @@ namespace mvcguzellik.Controllers
         // GET: Salonlar
         public ActionResult Index()
         {
+            //salon için ındex sayfası
             IEnumerable<mvcSalonlarModel> calList;
             HttpResponseMessage response = GlobalVariables.WebApClient.GetAsync("Salonlars").Result;
             calList = response.Content.ReadAsAsync<IEnumerable<mvcSalonlarModel>>().Result;
